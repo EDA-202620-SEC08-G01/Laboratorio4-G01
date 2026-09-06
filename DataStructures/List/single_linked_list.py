@@ -12,7 +12,7 @@ def get_element(my_list, pos):
     while searchpos < pos:
         node = node["next"]
         searchpos += 1
-    return node["info"]
+    return node["info"] 
 
 def is_present(my_list, element, cmp_function):
     is_in_array = False
