@@ -149,8 +149,12 @@ def get_user_position_on_queue(catalog, user_id, book_id):
     queue = q.new_queue()
 
     # TODO Completar la función que retorna la posición de un usuario en la cola para leer un libro. Se debe usar el TAD Cola para resolver el requerimiento.
-
-    return position
+    books_to_read = catalog['books_to_read']
+    for i in range(lt.size(books_to_read)):
+        book_to_read = lt.get_element(books_to_read, i)
+        if book_to_read['book_id'] == book_id:
+            q.enqueue(queue, book_to_read['user_id'])
+    return q.position(queue, user_id)
 
 # Funciones para agregar informacion al catalogo
 
@@ -271,7 +275,7 @@ def book_tag_size(catalog):
 
 def books_to_read_size(catalog):
     # TODO Implementar la función que retorna el tamaño de la lista de libros por leer
-    pass
+    return lt.size(catalog["books_to_read"])
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
@@ -361,15 +365,23 @@ def measure_stack_performance(catalog):
     # Medir push
     start_time = get_time()
     # TODO Implementar la medición de tiempo para la operación push
+    st.push(stack, 1)
+    end_time = get_time()
+    push_time = delta_time(start_time, end_time)
 
     # Medir top
     start_time = get_time()
     # TODO Implementar la medición de tiempo para la operación top
+    st.top(stack)
     end_time = get_time()
     top_time = delta_time(start_time, end_time)
 
     # Medir dequeue
     # TODO Implementar la medición de tiempo para la operación pop
+    start_time = get_time()
+    st.pop(stack)
+    end_time = get_time()
+    pop_time = delta_time(start_time, end_time)
 
     return {
         "push_time": push_time,
