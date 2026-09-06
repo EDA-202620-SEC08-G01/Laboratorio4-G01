@@ -1,26 +1,31 @@
-from DataStructures.Stack import stack as st
+from DataStructures.List import single_linked_list as lt
 
 def new_stack():
-    stack = st.new_stack()
+    stack = lt.new_list()
     return stack
     
     
 def push(my_stack,element):    
-    my_stack = st.push(my_stack, element)
+    my_stack = lt.add_first(my_stack, element)
     return my_stack
 
 
 def pop(my_stack):
-    elemento = st.pop(my_stack)
+    if lt.is_empty(my_stack) == True:
+        raise Exception('EmptyStructureError: stack is empty')
+    elemento = lt.first_element(my_stack)
+    lt.remove_first(my_stack)
     return elemento
     
 
 def is_empty(my_stack):
-    return(st.is_empty(my_stack))
+    return(lt.is_empty(my_stack))
     
 
 # peek() = top()
-def peek(my_list):
-    elemento = st.top(my_list)
+def top(my_stack):
+    if lt.is_empty(my_stack) == True:
+        raise Exception('EmptyStructureError: stack is empty')
+    elemento = lt.first_element(my_stack)
     return elemento
 
