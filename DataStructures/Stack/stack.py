@@ -29,3 +29,5 @@ def top(my_stack):
     elemento = lt.first_element(my_stack)
     return elemento
 
+def size(my_stack):
+    return lt.size(my_stack)
